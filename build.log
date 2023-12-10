@@ -1,0 +1,79 @@
+#1 [internal] load .dockerignore
+#1 transferring context: 2B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from dockerfile
+#2 transferring dockerfile: 2.21kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.8s
+
+#4 [base 1/1] FROM docker.io/library/node:18-alpine@sha256:4bdb3f3105718f0742bc8d64bb4e36e8f955ebbee295325e40ae80bc8ef78833
+#4 DONE 0.0s
+
+#5 [runner 2/8] RUN addgroup --system --gid 1001 nodejs
+#5 CACHED
+
+#6 [runner 1/8] WORKDIR /app
+#6 CACHED
+
+#7 [runner 3/8] RUN adduser --system --uid 1001 nextjs
+#7 CACHED
+
+#8 [internal] load build context
+#8 transferring context: 4.25MB 1.6s done
+#8 DONE 1.6s
+
+#9 [deps 1/4] RUN apk add --no-cache libc6-compat
+#9 CACHED
+
+#10 [deps 2/4] WORKDIR /app
+#10 CACHED
+
+#11 [deps 3/4] COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+#11 CACHED
+
+#12 [deps 4/4] RUN   if [ -f yarn.lock ]; then yarn --frozen-lockfile;   elif [ -f package-lock.json ]; then npm ci;   elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile;   else echo "Lockfile not found." && exit 1;   fi
+#12 0.405 yarn global v1.22.19
+#12 0.446 [1/4] Resolving packages...
+#12 1.501 [2/4] Fetching packages...
+#12 2.448 [3/4] Linking dependencies...
+#12 2.790 [4/4] Building fresh packages...
+#12 2.794 success Installed "pnpm@8.12.0" with binaries:
+#12 2.794       - pnpm
+#12 2.794       - pnpx
+#12 2.797 Done in 2.40s.
+#12 3.338 鈥塃RR_PNPM_FROZEN_LOCKFILE_WITH_OUTDATED_LOCKFILE鈥?Cannot perform a frozen installation because the version of the lockfile is incompatible with this version of pnpm
+#12 3.338 
+#12 3.338 Try either:
+#12 3.338 1. Aligning the version of pnpm that generated the lockfile with the version that installs from it, or
+#12 3.338 2. Migrating the lockfile so that it is compatible with the newer version of pnpm, or
+#12 3.338 3. Using "pnpm install --no-frozen-lockfile".
+#12 3.338 Note that in CI environments, this setting is enabled by default.
+#12 ERROR: process "/bin/sh -c if [ -f yarn.lock ]; then yarn --frozen-lockfile;   elif [ -f package-lock.json ]; then npm ci;   elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile;   else echo \"Lockfile not found.\" && exit 1;   fi" did not complete successfully: exit code: 1
+------
+ > [deps 4/4] RUN   if [ -f yarn.lock ]; then yarn --frozen-lockfile;   elif [ -f package-lock.json ]; then npm ci;   elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile;   else echo "Lockfile not found." && exit 1;   fi:
+#12 2.794       - pnpm
+#12 2.794       - pnpx
+#12 2.797 Done in 2.40s.
+#12 3.338 鈥塃RR_PNPM_FROZEN_LOCKFILE_WITH_OUTDATED_LOCKFILE鈥?Cannot perform a frozen installation because the version of the lockfile is incompatible with this version of pnpm
+#12 3.338 
+#12 3.338 Try either:
+#12 3.338 1. Aligning the version of pnpm that generated the lockfile with the version that installs from it, or
+#12 3.338 2. Migrating the lockfile so that it is compatible with the newer version of pnpm, or
+#12 3.338 3. Using "pnpm install --no-frozen-lockfile".
+#12 3.338 Note that in CI environments, this setting is enabled by default.
+------
+dockerfile:11
+--------------------
+  10 |     COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+  11 | >>> RUN \
+  12 | >>>   if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
+  13 | >>>   elif [ -f package-lock.json ]; then npm ci; \
+  14 | >>>   elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
+  15 | >>>   else echo "Lockfile not found." && exit 1; \
+  16 | >>>   fi
+  17 |     
+--------------------
+ERROR: failed to solve: process "/bin/sh -c if [ -f yarn.lock ]; then yarn --frozen-lockfile;   elif [ -f package-lock.json ]; then npm ci;   elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile;   else echo \"Lockfile not found.\" && exit 1;   fi" did not complete successfully: exit code: 1
