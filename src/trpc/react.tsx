@@ -7,7 +7,6 @@ import { useState } from "react";
 
 import { type AppRouter } from "~/server/api/root";
 import { getUrl, transformer } from "./shared";
-import { Providers } from "~/app/providers";
 
 export const api = createTRPCReact<AppRouter>();
 
@@ -40,12 +39,10 @@ export function TRPCReactProvider(props: {
   );
 
   return (
-    <Providers>
       <QueryClientProvider client={queryClient}>
         <api.Provider client={trpcClient} queryClient={queryClient}>
           {props.children}
         </api.Provider>
       </QueryClientProvider>
-    </Providers>
   );
 }
